@@ -6,6 +6,16 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
+
+export async function clientLoader({
+  params,
+}: Route.ClientLoaderArgs) {
+  // sleep for 2s
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return {}
+}
+
+
 export default function Home({ loaderData }: Route.ComponentProps) {
   return <div>about page</div>;
 }

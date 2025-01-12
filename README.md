@@ -8,6 +8,8 @@ Technologies used:
 * [sqlc](https://sqlc.dev/) for type-safe SQL
 * react-router for frontend routing and data fetching
 
+React Router is running in SPA mode and the generated client app is embedded in the Go binary.
+
 ## Usage
 
 Development:

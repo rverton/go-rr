@@ -5,10 +5,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useFetchers,
+  useNavigation,
 } from "react-router";
 
+// @ts-ignore
+import NProgress from "nprogress";
+import 'nprogress/nprogress.css';
+
 import type { Route } from "./+types/root";
-import stylesheet from "./app.css?url";
+import { useEffect } from "react";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -21,7 +27,6 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
-  { rel: "stylesheet", href: stylesheet },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -43,6 +48,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const navigation = useNavigation();
+  const fetchers = useFetchers();
+  useEffect(() => {
+    const fetchersIdle = fetchers.every((f) => f.state === 'idle');
+    if (navigation.state === 'idle' && fetchersIdle) {
+      NProgress.done();
+    } else {
+      NProgress.start();
+    }
+  }, [navigation.state, fetchers]);
   return <Outlet />;
 }
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Route } from "./+types/home";
 
 export function meta({ }: Route.MetaArgs) {
@@ -28,5 +29,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <li key={author.ID}>{author.Name}</li>
       ))}
     </ul>
+    <Link to="/about">About</Link>
   </div>;
 }
