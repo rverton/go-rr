@@ -8,5 +8,8 @@ frontend/watch:
 frontend/build:
 	cd frontend && npm run build
 
+app/watch:
+	air
+
 run:
 	go run ./cmd/gorr/
